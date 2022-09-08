@@ -91,4 +91,8 @@ export default {
 .menu__link:hover {
 	color: #858585;
 }
+
+.router-link-active {
+	color: #858585;
+}
 </style>
