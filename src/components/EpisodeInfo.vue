@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<h1 class="title">Title of episode: {{ episode.title }}</h1>
+		<h2 class="title">Date: {{ episode.air_date.replaceAll('-', '.') }}</h2>
 
 		<div class="death-wrap">
 			<h2 class="title" v-if="filterDeath.length">Number Of Death</h2>
