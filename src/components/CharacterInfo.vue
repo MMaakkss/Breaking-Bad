@@ -140,13 +140,15 @@ export default {
 			);
 		},
 		favourite() {
-			let storage = localStorage.getItem('favourite');
-			let storeData = storage.split(',');
+			if (localStorage.getItem('favourite') !== null) {
+				let storage = localStorage.getItem('favourite');
+				let storeData = storage.split(',');
 
-			if (storeData.includes(String(this.character.char_id))) {
-				this.toggle(true);
-			} else {
-				this.toggle(false);
+				if (storeData.includes(String(this.character.char_id))) {
+					this.toggle(true);
+				} else {
+					this.toggle(false);
+				}
 			}
 
 			return this.isActive;
@@ -191,7 +193,7 @@ export default {
 			} else {
 				localStorage.setItem('favourite', this.character.char_id);
 
-				this.toggle(false);
+				this.toggle(true);
 			}
 		},
 	},
