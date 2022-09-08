@@ -1,16 +1,16 @@
 <template>
 	<div class="wrap">
 		<div class="poster">
-			<img :src="serialData.Poster" :alt="serialData.Title"/>
-			<span class="rating">{{serialData.imdbRating}}</span>
+			<img :src="serialData.Poster" :alt="serialData.Title" />
+			<span class="rating">{{ serialData.imdbRating }}</span>
 		</div>
 		<h1 class="info">Title: {{ serialData.Title }}</h1>
 		<h2 class="info">Genre: {{ serialData.Genre }}</h2>
 		<h2 class="info">Writer: {{ serialData.Writer }}</h2>
 		<h2 class="info">Year: {{ serialData.Year }}</h2>
 		<h3 class="info">Released: {{ serialData.Released }}</h3>
-		<h3 class="info">Country: {{serialData.Country}}</h3>
-		<h3 class="info">Actors: {{serialData.Actors}}</h3>
+		<h3 class="info">Country: {{ serialData.Country }}</h3>
+		<h3 class="info">Actors: {{ serialData.Actors }}</h3>
 	</div>
 </template>
 
@@ -43,6 +43,11 @@ export default {
 	position: relative;
 	margin: auto;
 }
+
+.poster img {
+	max-width: 100%;
+}
+
 .rating {
 	position: absolute;
 	color: #ef3131;
@@ -54,6 +59,7 @@ export default {
 	top: 0;
 	transform: rotate(-25deg) translate(50%, -20%);
 }
+
 .info {
 	text-align: center;
 }

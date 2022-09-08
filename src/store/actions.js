@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+const baseUrl = 'https://www.breakingbadapi.com';
+
 export default {
 	getEpisodes(ctx, season) {
 		return new Promise(() => {
 			axios
-				.get(`https://www.breakingbadapi.com/api/episodes`)
+				.get(`${baseUrl}/api/episodes`)
 				.then((res) => {
 					if (res.status === 200) {
 						let amount = [];
@@ -32,7 +34,7 @@ export default {
 	getSingle(ctx, id) {
 		return new Promise(() => {
 			axios
-				.get(`https://www.breakingbadapi.com/api/episodes/${id}`)
+				.get(`${baseUrl}/api/episodes/${id}`)
 				.then((res) => {
 					if (res.status === 200) {
 						ctx.commit('setSingle', res.data[0]);
@@ -44,7 +46,7 @@ export default {
 	getCharacters(ctx) {
 		return new Promise(() => {
 			axios
-				.get(`https://www.breakingbadapi.com/api/characters`)
+				.get(`${baseUrl}/api/characters`)
 				.then((res) => {
 					if (res.status === 200) {
 						ctx.commit('setCharacters', res.data);
@@ -56,7 +58,7 @@ export default {
 	getSingleCharacter(ctx, id) {
 		return new Promise(() => {
 			axios
-				.get(`https://www.breakingbadapi.com/api/characters/${id}`)
+				.get(`${baseUrl}/api/characters/${id}`)
 				.then((res) => {
 					if (res.status === 200) {
 						if (res.data[0])
@@ -69,7 +71,7 @@ export default {
 	getDeath(ctx) {
 		return new Promise(() => {
 			axios
-				.get(`https://www.breakingbadapi.com/api/death`)
+				.get(`${baseUrl}/api/death`)
 				.then((res) => {
 					if (res.status === 200) {
 						ctx.commit('setDeath', res.data);
@@ -81,7 +83,7 @@ export default {
 	getSingleQuote(ctx, name) {
 		return new Promise(() => {
 			axios
-				.get(`https://www.breakingbadapi.com/api/quote?author=${name}`)
+				.get(`${baseUrl}/api/quote?author=${name}`)
 				.then((res) => {
 					if (res.status === 200) {
 						ctx.commit('setSingleQuote', res.data);
@@ -93,7 +95,7 @@ export default {
 	getQuote(ctx) {
 		return new Promise(() => {
 			axios
-				.get(`https://www.breakingbadapi.com/api/quotes`)
+				.get(`${baseUrl}/api/quotes`)
 				.then((res) => {
 					if (res.status === 200) {
 						ctx.commit('setQuote', res.data);
@@ -107,11 +109,9 @@ export default {
 			axios
 				.get(`https://www.omdbapi.com/?apikey=88e836ce&i=tt0903747`)
 				.then((res) => {
-					if (res.status === 200) {
-						ctx.commit('setSerialData', res.data);
-					}
+					ctx.commit('setSerialData', res.data);
 				})
 				.catch((err) => console.log(err.message));
 		});
-	}
+	},
 };

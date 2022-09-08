@@ -64,13 +64,9 @@ export default {
 	methods: {
 		...mapActions({
 			episodeInfo: 'getSingle',
-			getCharacters: 'getCharacters',
-			getDeath: 'getDeath',
 		}),
 	},
 	created() {
-		this.getCharacters();
-		this.getDeath();
 		this.episodeInfo(this.$route.params.id);
 	},
 };

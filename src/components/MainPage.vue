@@ -24,6 +24,11 @@
 								Occupation
 							</router-link>
 						</li>
+						<li class="menu__item">
+							<router-link to="/top-list" class="menu__link">
+								TopList
+							</router-link>
+						</li>
 					</ul>
 				</nav>
 			</div>
@@ -35,8 +40,22 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
 	name: 'MainPage',
+	methods: {
+		...mapActions({
+			episodes: 'getEpisodes',
+			getCharacters: 'getCharacters',
+			getDeath: 'getDeath',
+		}),
+	},
+	created() {
+		this.episodes();
+		this.getDeath();
+		this.getCharacters();
+	},
 };
 </script>
 
@@ -44,6 +63,7 @@ export default {
 .wrapper {
 	padding-bottom: 100px;
 }
+
 .container {
 	max-width: 1440px;
 	padding: 0 20px;
@@ -58,6 +78,7 @@ export default {
 .menu__list {
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 	gap: 20px;
 }
 

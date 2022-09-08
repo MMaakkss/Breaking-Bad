@@ -60,8 +60,7 @@ export default {
 	padding: 15px;
 	background: #2483f1ff;
 	border-radius: 10px;
-	height: 100%;
-	flex: 0 0 30%;
+	width: 30%;
 	cursor: pointer;
 	transition: 0.2s ease-out;
 }
@@ -91,11 +90,6 @@ export default {
 	overflow: hidden;
 }
 
-.characters-list {
-	display: flex;
-	flex-wrap: wrap;
-}
-
 .appearance:after {
 	content: ',';
 	margin-left: -4px;
@@ -109,5 +103,16 @@ export default {
 .bold {
 	font-weight: 500;
 	margin-right: 5px;
+}
+
+@media (max-width: 992px) {
+	.card {
+		width: 45%;
+	}
+}
+@media (max-width: 615px) {
+	.card {
+		width: 100%;
+	}
 }
 </style>

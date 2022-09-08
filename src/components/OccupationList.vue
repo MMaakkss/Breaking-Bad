@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
 	name: 'OccupationList',
@@ -38,12 +38,6 @@ export default {
 
 			return occupationList;
 		},
-	},
-	methods: {
-		...mapActions({ getCharacters: 'getCharacters' }),
-	},
-	created() {
-		this.getCharacters();
 	},
 };
 </script>

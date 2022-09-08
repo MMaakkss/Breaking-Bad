@@ -76,19 +76,19 @@ export default {
 	methods: {
 		...mapActions({
 			episodes: 'getEpisodes',
-			getCharacters: 'getCharacters',
 			getQuote: 'getQuote',
-			getDeath: 'getDeath',
 		}),
 		changeSeason(idx) {
-			if (this.$route.params.season !== idx) this.$router.push({ name: 'episode-season', params: { season: idx },});
+			if (this.$route.params.season !== idx)
+				this.$router.push({
+					name: 'episode-season',
+					params: { season: idx },
+				});
 		},
 	},
 	created() {
 		this.episodes(this.$route.params.season);
-		this.getCharacters();
 		this.getQuote();
-		this.getDeath();
 	},
 	watch: {
 		$route() {
@@ -138,18 +138,20 @@ export default {
 			});
 
 			//filter for death
-			this.deathList = this.death.filter((death) => {
-				return death.death
-					.toLowerCase()
-					.includes(this.search.toLowerCase());
-			});
+			this.deathList = this.death.filter((death) =>
+				death.death.toLowerCase().includes(this.search.toLowerCase())
+			);
 
 			this.deathList.forEach((death) => {
 				this.characters.forEach((character) => {
 					if (death.responsible.includes('and')) {
 						let responsibles = death.responsible.split('and');
 						responsibles.forEach((responsible) => {
-							if (character.name === responsible.trim()) this.charactersList = [...this.charactersList, character,];
+							if (character.name === responsible.trim())
+								this.charactersList = [
+									...this.charactersList,
+									character,
+								];
 						});
 					} else {
 						if (character.name === death.responsible)
@@ -212,12 +214,39 @@ export default {
 }
 
 .list__item {
-	flex-basis: 30%;
+	width: 30%;
 	cursor: pointer;
 	transition: 0.2s ease-out;
 }
 
 .list__item:hover {
 	box-shadow: 0 0 25px -10px rgba(51, 51, 51, 1);
+}
+
+@media (max-width: 992px) {
+	.list__item {
+		width: 45%;
+	}
+}
+
+@media (max-width: 615px) {
+	.list__item {
+		width: 100%;
+	}
+
+	.input {
+		width: 100%;
+	}
+
+	.seasons {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.seasons__item {
+		margin-bottom: 15px;
+		font-size: 18px;
+		border-right: none;
+	}
 }
 </style>

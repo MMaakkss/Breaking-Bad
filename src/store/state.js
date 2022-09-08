@@ -7,5 +7,5 @@ export default {
 	death: [],
 	singleQuote: [],
 	quote: [],
-	serialData: {}
+	serialData: {},
 };

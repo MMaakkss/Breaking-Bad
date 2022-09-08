@@ -2,7 +2,7 @@
 	<div class="card">
 		<div
 			class="icon"
-			:class="{active: favourite}"
+			:class="{ active: favourite }"
 			@click="addToFavourite"
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -69,10 +69,30 @@
 		</div>
 
 		<div class="card__item wrap">
+			<h3>Episodes:</h3>
+
+			<div
+				v-for="(season, seasonIdx) in character.appearance"
+				:key="seasonIdx"
+			>
+				<span> Season{{ season }}: </span>
+				<template v-for="(episode, episodeIdx) in filterEpisodes">
+					<span
+						class="multi-world"
+						v-if="episode.season == season"
+						:key="episodeIdx"
+					>
+						{{ episode.episode }}
+					</span>
+				</template>
+			</div>
+		</div>
+
+		<div class="card__item wrap">
 			<h3>TimeLine:</h3>
 			<div
 				class="timeline"
-				v-for="(item, idx) in filterEpisodes"
+				v-for="(item, idx) in filterEpisodesDate"
 				:key="idx"
 			>
 				<div>Season: {{ item.season }}</div>
@@ -95,8 +115,8 @@ export default {
 	name: 'CharacterInfo',
 	data() {
 		return {
-			isActive: false
-		}
+			isActive: false,
+		};
 	},
 	computed: {
 		...mapGetters({
@@ -108,16 +128,16 @@ export default {
 		formatDate() {
 			return this.character?.birthday?.replaceAll('-', '.');
 		},
-		filterEpisodes() {
-			let episodes = this.episodes.filter((episode) =>
-				episode.characters.includes(this.character.name)
-			);
-
-			episodes.sort(
+		filterEpisodesDate() {
+			let episodes = this.filterEpisodes;
+			return episodes.sort(
 				(a, b) => new Date(a.air_date) - new Date(b.air_date)
 			);
-
-			return episodes;
+		},
+		filterEpisodes() {
+			return this.episodes.filter((episode) =>
+				episode.characters.includes(this.character.name)
+			);
 		},
 		favourite() {
 			let storage = localStorage.getItem('favourite');
@@ -130,14 +150,12 @@ export default {
 			}
 
 			return this.isActive;
-		}
+		},
 	},
 	methods: {
 		...mapActions({
 			getCharacter: 'getSingleCharacter',
 			getQuote: 'getSingleQuote',
-			getDeath: 'getDeath',
-			getEpisodes: 'getEpisodes',
 		}),
 		toggle(state) {
 			this.isActive = state;
@@ -153,12 +171,18 @@ export default {
 						storage = storage + ',' + this.character.char_id;
 						localStorage.setItem('favourite', storage);
 					} else {
-						localStorage.setItem('favourite', this.character.char_id);
+						localStorage.setItem(
+							'favourite',
+							this.character.char_id
+						);
 					}
 
-					this.toggle(true)
+					this.toggle(true);
 				} else {
-					storeData.splice(storeData.indexOf(String(this.character.char_id)), 1);
+					storeData.splice(
+						storeData.indexOf(String(this.character.char_id)),
+						1
+					);
 					storeData = storeData.join();
 					localStorage.setItem('favourite', storeData);
 
@@ -173,8 +197,6 @@ export default {
 	},
 	created() {
 		this.getCharacter(this.$route.params.id);
-		this.getDeath();
-		this.getEpisodes();
 	},
 	watch: {
 		character() {
