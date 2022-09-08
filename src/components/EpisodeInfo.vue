@@ -1,6 +1,9 @@
 <template>
 	<div>
-		<h1 class="title">Title of episode: {{ episode.title }}</h1>
+		<h1 class="title">
+			Title of episode:
+			<span class="episode-title">{{ episode.title }}</span>
+		</h1>
 		<h2 class="title">Date: {{ episode.air_date.replaceAll('-', '.') }}</h2>
 
 		<div class="death-wrap">
@@ -77,6 +80,11 @@ export default {
 .title {
 	width: fit-content;
 	margin: auto auto 20px;
+}
+
+.episode-title {
+	font-weight: 500;
+	font-style: italic;
 }
 
 .characters__list {
