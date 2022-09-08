@@ -284,4 +284,9 @@ h3 {
 .timeline:last-child {
 	margin-bottom: 0;
 }
+@media (max-width: 600px) {
+	.card {
+		width: 100%;
+	}
+}
 </style>
